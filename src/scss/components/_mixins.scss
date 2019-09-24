@@ -1,0 +1,35 @@
+@mixin transform($x, $y) {
+    -webkit-transform: translate($x, $y);
+    transform: translate($x, $y);
+}
+
+@mixin transformx($x) {
+    -webkit-transform: translatex($x);
+    transform: translatex($x);
+}
+
+@mixin transformy($y) {
+    -webkit-transform: translatey($y);
+    transform: translatey($y);
+}
+
+@mixin box-shadow($x, $y, $blur, $spread, $color) {
+    -webkit-box-shadow: $x $y $blur $spread $color;
+    box-shadow: $x $y $blur $spread $color;
+}
+
+@mixin transition($time: 0.3s) {
+    transition: $time;
+}
+
+@mixin min_width($width) {
+    @media screen and (min-width: $width) {
+        @content;
+    }
+}
+
+@mixin max_width($width) {
+    @media screen and (max-width: $width) {
+        @content;
+    }
+}

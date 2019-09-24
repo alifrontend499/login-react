@@ -1,0 +1,65 @@
+@mixin min_width($width) {
+    @media screen and (min-width: $width) {
+        @content;
+    }
+}
+
+@mixin max_width($width) {
+    @media screen and (max-width: $width) {
+        @content;
+    }
+}
+
+// html,
+// body {
+//     height: 100vh;
+// }
+
+.app-login-register {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    background: rgb(131, 58, 180);
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(252, 176, 69, 1) 100%);
+    padding: 0 15px;
+
+    >.ALR-inner {
+        width: 100%;
+
+        @include min_width(768px) {
+            width: 400px;
+        }
+
+        padding: 30px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        background: #fff;
+        border-radius: 4px;
+    }
+
+    .add-info {
+        text-align: center;
+        margin: 20px 0 0;
+
+        p {
+            font-size: 13px;
+            font-weight: 600;
+            margin: 0;
+            color: #494949;
+        }
+
+        a {
+            color: #3f51b5;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
