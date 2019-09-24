@@ -36,10 +36,17 @@ export default function Login() {
     const handleMouseDownPassword = event => {
         event.preventDefault();
     };
+    const handleSubmit = event => {
+        event.preventDefault();
+        console.log(event.target)
+    }
     return (
         <div className="app-login-register">
             <div className="ALR-inner">
-                <form className='login-form' noValidate autoComplete="off">
+                <div className="logo">
+                    <img src="https://cdn4.iconfinder.com/data/icons/social-media-circle-6/1024/iTunes-512.png" alt="" className="img-fluid" />
+                </div>
+                <form method="post" className='login-form' noValidate autoComplete="off" onSubmit={handleSubmit}>
                     <TextField
                         id="outlined-email-input"
                         label="Email"
@@ -77,7 +84,7 @@ export default function Login() {
                         }}
                         fullWidth
                     />
-                    <Button variant="contained" color="primary" size="large" component="button" className={classes.button}>
+                    <Button type="submit" variant="contained" color="primary" size="large" component="button" className={classes.button}>
                         Login
                     </Button>
                 </form>

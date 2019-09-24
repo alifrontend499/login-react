@@ -42,6 +42,9 @@ export default function Register() {
     return (
         <div className="app-login-register">
             <div className="ALR-inner">
+                <div className="logo">
+                    <img src="https://cdn4.iconfinder.com/data/icons/social-media-circle-6/1024/iTunes-512.png" alt="" className="img-fluid" />
+                </div>
                 <form className='login-form' noValidate autoComplete="off">
                     <TextField
                         id="outlined-first-name"
