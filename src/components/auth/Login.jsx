@@ -9,6 +9,9 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import './scss/login-and-register.scss';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import axios from 'axios';
+import storeUser from '../../_helpers/_storeUser';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -27,6 +30,7 @@ export default function Login() {
         password: '',
         showPassword: false,
     });
+    const [loading, setLoading] = useState(false);
     const handleChange = prop => event => {
         setValues({ ...values, [prop]: event.target.value });
     };
@@ -38,7 +42,22 @@ export default function Login() {
     };
     const handleSubmit = event => {
         event.preventDefault();
-        console.log(event.target)
+        const email = event.target['email'].value;
+        const password = event.target['password'].value;        
+        if (email !== '' && password !== '') {
+            setLoading(true);
+            axios.post('http://localhost:5000/api/user/login', {
+                email: email,
+                password: password
+            }).then(function (response) {
+                console.log(response.data);
+                storeUser(response.data);
+                setLoading(false);
+            }).catch(function (error) {
+                console.log(error);
+                setLoading(false);
+            });
+        }
     }
     return (
         <div className="app-login-register">
@@ -67,6 +86,7 @@ export default function Login() {
                         type={values.showPassword ? 'text' : 'password'}
                         label="Password"
                         value={values.password}
+                        name="password"
                         onChange={handleChange('password')}
                         InputProps={{
                             endAdornment: (
@@ -85,7 +105,12 @@ export default function Login() {
                         fullWidth
                     />
                     <Button type="submit" variant="contained" color="primary" size="large" component="button" className={classes.button}>
-                        Login
+                        {
+                            loading ?
+                                <CircularProgress className={classes.progress} color="secondary" size={26} />
+                                :
+                                <span>Login</span>
+                        }
                     </Button>
                 </form>
                 <div className="add-info">
