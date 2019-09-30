@@ -54,7 +54,7 @@ export default function Login() {
                 storeUser(response.data);
                 setLoading(false);
             }).catch(function (error) {
-                console.log(error);
+                console.log('ERRRRRR', error);
                 setLoading(false);
             });
         }

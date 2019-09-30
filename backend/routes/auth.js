@@ -40,13 +40,13 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     // VALIDATING DATA
     const { error } = loginValidation(req.body);
-    if (error) return res.send(403,{error: error.details[0].message});
+    if (error) return res.status(403).send({ error: error.details[0].message });
     // CHECKING IF USER EXISTS
     const user = await User.findOne({ email: req.body.email });
-    if (!user) return res.send(403,{error: 'Email is not found'});
+    if (!user) return res.status(403).send({ error: 'Email is not found' });
     // PASSWORD IS CORRECT OR NOT
     const validPassword = await bcrypt.compare(req.body.password, user.password);
-    if (!validPassword) return res.send(403,{error: 'Email or password is wrong'});
+    if (!validPassword) return res.status(403).send({ error: 'Email or password is wrong' });
     // IF EVERYTHING IS GOOD
     // CREATING JSONWEBTOKEN
     const token = jwt.sign({
